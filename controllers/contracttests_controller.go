@@ -62,7 +62,6 @@ func (r *ContractTestsReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 	log.Info("Reconciler Contract name: " + ContractT.Spec.ContractName)
 
 	log.Info("Waiting for secs:" + fmt.Sprint(ContractT.Spec.WaitSecs))
-	//sleep for 10 seconds before updating the status
 	// var mostRecentTime *time.Time
 
 	time.Sleep(time.Duration(ContractT.Spec.WaitSecs) * time.Second)
@@ -78,6 +77,8 @@ func (r *ContractTestsReconciler) Reconcile(ctx context.Context, req ctrl.Reques
 		log.Error(err, "Unable to update HelloWorld status")
 		return ctrl.Result{}, err
 	}
+	log.Info("Status updated")
+	log.Info(fmt.Sprintf("%+v\n", ContractT))
 	return ctrl.Result{}, nil
 }
 
